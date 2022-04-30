@@ -6,34 +6,41 @@ import Search from "../components/Search";
 export default class Main extends Component {
   state = {
     movies: [],
+    loading: false,
   };
 
   componentDidMount() {
+    this.setState({ loading: true });
     try {
       fetch(`http://www.omdbapi.com/?apikey=bbfe5210&s=matrix`)
         .then((res) => res.json())
-        .then((data) => this.setState({ movies: data.Search }));
+        .then((data) => this.setState({ movies: data.Search, loading: false }));
     } catch (error) {
       new Error(error);
     }
   }
 
-  searchMovie = (str) => {
+  searchMovie = (str, type = "all") => {
+    this.setState({ loading: true });
     try {
-      fetch(`http://www.omdbapi.com/?apikey=bbfe5210&s=${str}`)
+      fetch(
+        `http://www.omdbapi.com/?apikey=bbfe5210&s=${str}${
+          type !== "all" ? `&type=${type}` : ""
+        }`
+      )
         .then((res) => res.json())
-        .then((data) => this.setState({ movies: data.Search }));
+        .then((data) => this.setState({ movies: data.Search, loading: false }));
     } catch (error) {
       new Error(error);
     }
   };
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
     return (
       <main className='container content'>
         <Search searchMovie={this.searchMovie} />
-        {movies && movies.length ? <Movies movies={movies} /> : <Prealoader />}
+        {loading ? <Prealoader /> : <Movies movies={movies} />}
       </main>
     );
   }

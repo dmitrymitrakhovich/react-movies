@@ -18,3 +18,9 @@ nav {
   top: 0;
   right: 0.5rem;
 }
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}

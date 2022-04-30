@@ -10,7 +10,7 @@ export default function Movie({ movie }) {
   } = movie;
 
   return (
-    <div className='card' id={id}>
+    <div className='card' id={id} key={id}>
       <div className='card-image waves-effect waves-block waves-light'>
         {poster === "N/A" ? (
           <img
