@@ -10,20 +10,20 @@ export default function Movie({ movie }) {
   } = movie;
 
   return (
-    <div class='card' id={id}>
-      <div class='card-image waves-effect waves-block waves-light'>
+    <div className='card' id={id}>
+      <div className='card-image waves-effect waves-block waves-light'>
         {poster === "N/A" ? (
           <img
-            class='activator'
+            className='activator'
             src={`https://via.placeholder.com/300x450?text=${title}`}
             alt={title}
           />
         ) : (
-          <img class='activator' src={poster} alt={title} />
+          <img className='activator' src={poster} alt={title} />
         )}
       </div>
-      <div class='card-content'>
-        <span class='card-title activator grey-text text-darken-4'>
+      <div className='card-content'>
+        <span className='card-title activator grey-text text-darken-4'>
           {title}
         </span>
         <p>
