@@ -13,11 +13,12 @@ export default class Main extends Component {
   componentDidMount() {
     this.setState({ loading: true });
     try {
-      fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
+      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
         .then((res) => res.json())
         .then((data) => this.setState({ movies: data.Search, loading: false }));
     } catch (error) {
-      new Error(error);
+      console.error(error);
+      this.setState({ loading: false });
     }
   }
 
@@ -25,14 +26,15 @@ export default class Main extends Component {
     this.setState({ loading: true });
     try {
       fetch(
-        `http://www.omdbapi.com/?apikey=${API_KEY}&s=${str}${
+        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${str}${
           type !== "all" ? `&type=${type}` : ""
         }`
       )
         .then((res) => res.json())
         .then((data) => this.setState({ movies: data.Search, loading: false }));
     } catch (error) {
-      new Error(error);
+      console.error(error);
+      this.setState({ loading: false });
     }
   };
 
